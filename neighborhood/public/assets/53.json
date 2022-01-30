@@ -1,0 +1,54 @@
+{
+  "name": "Gentie Home #53",
+  "symbol": "GENTHOME",
+  "description": "Real Estate for the Gentie Neighborhood. Rent is going up!",
+  "seller_fee_basis_points": 1000,
+  "image": "image.png",
+  "external_url": "https://genties.com/",
+  "edition": 53,
+  "attributes": [
+    {
+      "trait_type": "Sky",
+      "value": "Morningdew"
+    },
+    {
+      "trait_type": "Trees",
+      "value": "Cactus"
+    },
+    {
+      "trait_type": "Yard",
+      "value": "Dry"
+    },
+    {
+      "trait_type": "Back",
+      "value": "Blue"
+    },
+    {
+      "trait_type": "Front",
+      "value": "Windows Red"
+    },
+    {
+      "trait_type": "Add Ons",
+      "value": "Pink Loft"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "image.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": [
+      {
+        "address": "9JqSS98VQy4Lsr7BCPm9ehD6YQhQxkf8WCSjXp1jdtMm",
+        "share": 50
+      },
+      {
+        "address": "5Pa7digzR6KBRVqdoZ98j78LZoQKrJuBQgqJLTToVu4V",
+        "share": 50
+      }
+    ]
+  }
+}
