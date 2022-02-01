@@ -1,6 +1,7 @@
 import IRoute from '../interfaces/route';
 import HomePage from '../pages/Home';
 import NeighborhoodPage from '../pages/Neighborhood';
+import RoomPage from '../pages/Room';
 
 const routes: IRoute[] = [
     {
@@ -11,8 +12,14 @@ const routes: IRoute[] = [
     },
     {
         path: '/neighborhood',
-        name: 'About Page',
+        name: 'Neighborhood Page',
         component: NeighborhoodPage,
+        exact: true
+    },
+    {
+        path: '/room',
+        name: 'Room Page',
+        component: RoomPage,
         exact: true
     }
 ]
