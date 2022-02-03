@@ -8,7 +8,7 @@ export interface IHouseComponentProps {
 
 const HouseComponent: React.FunctionComponent<IHouseComponentProps> = (props) => {
     return (
-        <Link className='squareStyle' to={'/neighborhood/room/' + props.house.runningCount} key="house.runningCount" >
+        <Link className='squareStyle' to={'/neighborhood/room/' + props.house.runningCount} key="house.runningCount">
             <img className='squareStyle' src={props.house.image} />
             <Outlet />
         </Link>
