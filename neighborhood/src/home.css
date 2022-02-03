@@ -3,3 +3,8 @@
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;
 }
+
+.square {
+    width: '15px';
+    height: '15px';
+};

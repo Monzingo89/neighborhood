@@ -12,7 +12,7 @@ const NeighborhoodRowComponent: React.FunctionComponent<INeighborhoodRowComponen
     let squareObjects: SquareObject[] = props.row[0].houses;
     
     return (
-        <div>
+        <div className="neighborhood-row-container">
             {squareObjects.map((finalHouse, o) => {
                 if(finalHouse.squareType === SquareTypeEnum.Grass){
                     return <Grass key={finalHouse.runningCount} house={finalHouse}/>
