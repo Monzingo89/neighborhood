@@ -1,20 +1,28 @@
 import React from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
 import "../home.css";
+import NeighborhoodPage from './Neighborhood';
 
 export interface IHomePageProps {}
 
 const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
     return (
-        
-        <Navbar className="navbar">
-            <Container>
-                <Nav className="me-auto">
-                    <Link to="/neighborhood"></Link>
-                </Nav>
-            </Container>
+        <>
+        <Navbar>
+            <Navbar.Brand href="#home">
+                GENTIES NEIGHBORHOOD 
+            </Navbar.Brand>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+                <Nav.Link href="#home">MAGIC EDEN</Nav.Link>
+                <Nav.Link href="#link">TWITTER</Nav.Link>
+                <Nav.Link href="#link">DISCORD</Nav.Link>
+            </Navbar.Collapse>
         </Navbar>
+       
+        <NeighborhoodPage/>
+        </>
+       
     );
 };
 

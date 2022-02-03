@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LayoutComponent from './components/Layout';
 import HomePage from './pages/Home';
 import NeighborhoodPage from './pages/Neighborhood';
 import RoomPage from './pages/Room';
@@ -11,7 +10,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<NeighborhoodPage />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="neighborhood">
                     <Route index element={<NeighborhoodPage />} />
                     <Route path="/neighborhood/room/:number" element={<RoomPage />} />
