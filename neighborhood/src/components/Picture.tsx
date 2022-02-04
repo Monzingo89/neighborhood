@@ -1,15 +1,13 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import "../home.css";
 export interface IPictureComponentProps {
-    response:any
+    nft:any
 }
 
 const PictureComponent: React.FunctionComponent<IPictureComponentProps> = (props) => {
-    console.log(props);
-    let nftString = props;
     return (
-        <div>  </div>
-      
+        <img className='nftSyle' src={props.nft} alt="" />
     );
 };
 

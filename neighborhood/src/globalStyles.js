@@ -14,6 +14,11 @@ const GlobalStyle = createGlobalStyle`
   .neighborhood-row-container {
     display: flex;
   }
+
+  .nftSyle {
+    width:100px;
+    height:100px;
+  }
 `;
 
 export default GlobalStyle;
