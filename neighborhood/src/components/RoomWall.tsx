@@ -35,20 +35,15 @@ class RoomWallComponent extends React.Component<any,any> {
     }
     
     async getImageForEachString(resp: any[]) {
-        let response = '';
-        let nftImages: string[] = [];
-
+        let promiseList: any[] = [];
         resp.forEach(async nft => {
-            response = await axios.get(nft.data.uri).then(async function(res: { data: { image: string; }; }){
-                console.log(res)
-                await nftImages.push(res.data.image);
-            });
+            promiseList.push(axios.get(nft.data.uri));
         })
         
-        console.log(nftImages);
+        const bar = await Promise.all(promiseList);
+        console.log(bar);
         console.log('This happens 6th.');
-        await new Promise(f => setTimeout(f, 4000));
-        return nftImages;
+        return bar;
     }
 
     componentDidMount() {
@@ -82,8 +77,8 @@ class RoomWallComponent extends React.Component<any,any> {
         console.log(this.state.data);
         return (
           <div>
-                {this.state.data.map((item: React.Key | null | undefined) => {
-                    return <PictureComponent key={item} nft={item} />
+                {this.state.data.map((item: { data: { image: React.Key | null | undefined; }; }) => {
+                    return <PictureComponent key={item.data.image} nft={item.data.image} />
                 })}
          </div>
         );
