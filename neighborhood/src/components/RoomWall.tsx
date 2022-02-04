@@ -12,7 +12,6 @@ var connection = new web3.Connection(
 class RoomWallComponent extends React.Component<any,any> {
     constructor(props: any) {
         super(props);
-        console.log('This happens 1st.');  
         this.state = {
           loading: 'initial',
           data: []
