@@ -19,6 +19,11 @@ const GlobalStyle = createGlobalStyle`
     width:100px;
     height:100px;
   }
+
+  html, body, #root, .wrapper {
+    width:100%;
+    height: 100%;
+  }
 `;
 
 export default GlobalStyle;
