@@ -24,10 +24,8 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
                 <Nav.Link href="https://discord.com/invite/WU6E8uqQwJ" target="_blank">DISCORD</Nav.Link>
             </Navbar.Collapse>
         </Navbar>
-       
         <NeighborhoodPage/>
         </>
-       
     );
 };
 

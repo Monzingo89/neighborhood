@@ -6,7 +6,7 @@ export interface IStreetComponentProps {
 
 const StreetComponent: React.FunctionComponent<IStreetComponentProps> = (props) => {
     return (
-        <img key="house.runningCount" className='squareStyle' src={props.house.image} />
+        <img key="house.runningCount" className='squareStyle' src={props.house.image} alt=""/>
     );
 };
 
