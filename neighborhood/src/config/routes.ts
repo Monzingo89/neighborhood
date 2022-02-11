@@ -1,6 +1,7 @@
 import IRoute from '../interfaces/route';
 import HomePage from '../pages/Home';
 import NeighborhoodPage from '../pages/Neighborhood';
+import NFTSelectionPage from '../pages/NFTSelectionPage';
 import RoomPage from '../pages/Room';
 
 const routes: IRoute[] = [
@@ -20,6 +21,12 @@ const routes: IRoute[] = [
         path: '/room',
         name: 'Room Page',
         component: RoomPage,
+        exact: true
+    },
+    {
+        path: '/selection',
+        name: 'Selection Page',
+        component: NFTSelectionPage,
         exact: true
     }
 ]

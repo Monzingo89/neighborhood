@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import * as web3 from '@solana/web3.js';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
 import PictureComponent from '../components/Picture';
@@ -10,19 +10,24 @@ var connection = new web3.Connection(
     'confirmed',
 );
 
+export interface INFTSelectionPageProps {}
+
 const welcomeHeader = 'WELCOME HOME DADDY!' + ' <3';
 
-const NFTCollectionPage: React.FunctionComponent = (props) => {
-    let { pubKey } = useParams();
+const NFTCollectionPage: React.FunctionComponent<INFTSelectionPageProps> = (props) => {
+    //TODO change this to not allow users to manually go to selection page
+    const { pathname } = useLocation();
+    let pubKey = pathname.split("/").pop();
     return (
         <div style={{ backgroundColor: '#B1C3F5', backgroundSize: '100% 100%', height: '100%', textAlign: 'center' }}>
             <div>
                 <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>{welcomeHeader}</h1>
             </div>
             <div>
-                <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>SELECT WHOME TO PUT ON DISPLAY</h1>
+                <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>SELECT WHOM TO PUT ON DISPLAY</h1>
             </div>
             <RenderNFTs pubKey={pubKey}/>
+            <Outlet />
         </div>
     )
 };
@@ -70,6 +75,7 @@ class RenderNFTs extends React.Component<any,any> {
       }  
 
       render() {
+        
         if (this.state.loading === 'initial') {
             return ( <>
               <h2>INITIALIZING</h2>
@@ -82,7 +88,7 @@ class RenderNFTs extends React.Component<any,any> {
               </>);
           }
           
-          if(this.state.loading === 'true'){
+          if(this.state.loading === 'false'){
             return ( <>
               <div>
                   {this.state.data.map((item: { data: { image: React.Key | null | undefined; }; }) => {
@@ -90,8 +96,8 @@ class RenderNFTs extends React.Component<any,any> {
                   })}
               </div>
             </>);
+          }
       }
-}
 }
 
 export default NFTCollectionPage;
