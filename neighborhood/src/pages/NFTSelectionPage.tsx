@@ -1,8 +1,7 @@
 import React from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import * as web3 from '@solana/web3.js';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
-import PictureComponent from '../components/Picture';
 
 const axios = require('axios').default;
 var connection = new web3.Connection(
@@ -15,9 +14,11 @@ export interface INFTSelectionPageProps {}
 const welcomeHeader = 'WELCOME HOME ZADDY!' + ' <3';
 
 const NFTCollectionPage: React.FunctionComponent<INFTSelectionPageProps> = (props) => {
+
     //TODO change this to not allow users to manually go to selection page
     const { pathname } = useLocation();
     let pubKey = pathname.split("/").pop();
+
     return (
         <div style={{ backgroundColor: '#B1C3F5', backgroundSize: '100% 100%', height: '200vh', textAlign: 'center' }}>
             <div>
@@ -39,12 +40,12 @@ class RenderNFTs extends React.Component<any,any> {
         this.state = {
           loading: 'initial',
           data: [],
-          pubKey: props.pubKey
+          pubKey: props.pubKey.toLocaleString(),
         };
     }
 
     loadData() {
-        var promise = metadata.Metadata.findDataByOwner(connection, this.state.pubKey.toLocaleString()).then(async (resp) =>{
+        var promise = metadata.Metadata.findDataByOwner(connection, this.state.pubKey).then(async (resp) =>{
                 console.log(resp)
                 return await this.getImageForEachString(resp)
         });
@@ -75,7 +76,13 @@ class RenderNFTs extends React.Component<any,any> {
       }  
 
       render() {
-        
+        const handleNFTSave = (nftImageUrl: any) => {
+          console.log(nftImageUrl);
+          console.log(this.state.pubKey);
+          // createNFTForRoom(nftImageUrl).then(res => {
+          //   console.log('NFT Saved');
+          // });
+        }
         if (this.state.loading === 'initial') {
             return ( <>
               <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}}>INITIALIZING</h2>
@@ -92,7 +99,7 @@ class RenderNFTs extends React.Component<any,any> {
             return ( <>
             <div className='container' style={{borderStyle: 'dashed', borderColor: 'purple'}}>
                     {this.state.data.map((item: { data: { image: React.Key | null | undefined; }; }) => {
-                        return <PictureComponent key={item.data.image} nft={item.data.image} />
+                        return <img style={{padding: '10px', cursor: 'pointer',  height: '200px', width: '200px' }} className='nftSyle' src={`${item.data.image}`} onClick={() => handleNFTSave(item.data.image)} alt="" key={item.data.image} />
                     })}
             </div>
               
