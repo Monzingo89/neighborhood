@@ -18,6 +18,7 @@
 .env.test.local
 .env.production.local
 
+environment.d.ts
 .env.config
 .env
 

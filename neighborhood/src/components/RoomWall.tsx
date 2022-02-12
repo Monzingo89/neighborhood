@@ -3,10 +3,18 @@ import React, { FC } from 'react';
 import { WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Link, Outlet, useParams  } from 'react-router-dom';
+import { getNFTForRoom } from '../api';
 
 class RoomWallComponent extends React.Component<any,any> {
     
       render() {
+          const loadRoom = () => {
+            getNFTForRoom(342).then((res: any) => {
+              console.log(res);
+            });
+          }
+      
+          loadRoom();
           return ( 
           <>
             <SendOneLamportToRandomAddress />
@@ -27,7 +35,7 @@ export const SendOneLamportToRandomAddress: FC = props => {
     return publicKey?.toString().substring(0, 4) + '...' + publicKey?.toString().slice(publicKey?.toString().length - 4);
   }
   const shortWallet = publicKey ? getShortWalletString() : '';
-
+  
   return (
     <>
       <div style={{paddingRight: '30px', paddingTop:'20px', float: 'right'}}>

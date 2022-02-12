@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import * as web3 from '@solana/web3.js';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
+import { createNFTForRoom } from '../api';
 
 const axios = require('axios').default;
 var connection = new web3.Connection(
@@ -77,11 +78,9 @@ class RenderNFTs extends React.Component<any,any> {
 
       render() {
         const handleNFTSave = (nftImageUrl: any) => {
-          console.log(nftImageUrl);
-          console.log(this.state.pubKey);
-          // createNFTForRoom(nftImageUrl).then(res => {
-          //   console.log('NFT Saved');
-          // });
+          createNFTForRoom({wallet: this.state.pubKey, imageUrl: nftImageUrl, houseNumber: 342}).then((res: any) => {
+            console.log(res);
+          });
         }
         if (this.state.loading === 'initial') {
             return ( <>

@@ -1,13 +1,24 @@
 import { client, q } from '../config/db';
 
-export const createNFTForRoom = (wallet: any) =>
+export const createNFTForRoom = ({wallet, imageUrl, houseNumber}: any) =>
     client
         .query(
-            q.Create(q.Collection('GentieHodler'), {
+            q.Create(q.Collection('GentiesHodlers'), {
                 data: {
                     wallet,
+                    imageUrl,
+                    houseNumber
                 }
             })
+        )
+        .then(ret => ret)
+        .catch(error => console.error('Error: ', error.message));
+
+export const getNFTForRoom = (houseNumber: any) =>
+    client
+        .query(
+            q.Get(
+                q.Match(q.Index('nft_by_house'), houseNumber))
         )
         .then(ret => ret)
         .catch(error => console.error('Error: ', error.message));
