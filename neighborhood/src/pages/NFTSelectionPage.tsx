@@ -12,19 +12,19 @@ var connection = new web3.Connection(
 
 export interface INFTSelectionPageProps {}
 
-const welcomeHeader = 'WELCOME HOME DADDY!' + ' <3';
+const welcomeHeader = 'WELCOME HOME ZADDY!' + ' <3';
 
 const NFTCollectionPage: React.FunctionComponent<INFTSelectionPageProps> = (props) => {
     //TODO change this to not allow users to manually go to selection page
     const { pathname } = useLocation();
     let pubKey = pathname.split("/").pop();
     return (
-        <div style={{ backgroundColor: '#B1C3F5', backgroundSize: '100% 100%', height: '100%', textAlign: 'center' }}>
+        <div style={{ backgroundColor: '#B1C3F5', backgroundSize: '100% 100%', height: '200vh', textAlign: 'center' }}>
             <div>
                 <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>{welcomeHeader}</h1>
             </div>
             <div>
-                <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>SELECT WHOM TO PUT ON DISPLAY</h1>
+                <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive', paddingBottom: '20px' }}>SELECT WHO TO PUT ON DISPLAY:</h1>
             </div>
             <RenderNFTs pubKey={pubKey}/>
             <Outlet />
@@ -78,23 +78,24 @@ class RenderNFTs extends React.Component<any,any> {
         
         if (this.state.loading === 'initial') {
             return ( <>
-              <h2>INITIALIZING</h2>
+              <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}}>INITIALIZING</h2>
             </>);
           }
   
           if (this.state.loading === 'true') {
             return ( <>
-                <h2>LOADING NFTs</h2>
+                <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}}>LOADING NFTs</h2>
               </>);
           }
           
           if(this.state.loading === 'false'){
             return ( <>
-              <div>
-                  {this.state.data.map((item: { data: { image: React.Key | null | undefined; }; }) => {
-                      return <PictureComponent key={item.data.image} nft={item.data.image} />
-                  })}
-              </div>
+            <div className='container' style={{borderStyle: 'dashed', borderColor: 'purple'}}>
+                    {this.state.data.map((item: { data: { image: React.Key | null | undefined; }; }) => {
+                        return <PictureComponent key={item.data.image} nft={item.data.image} />
+                    })}
+            </div>
+              
             </>);
           }
       }

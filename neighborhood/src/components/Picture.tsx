@@ -6,7 +6,7 @@ export interface IPictureComponentProps {
 
 const PictureComponent: React.FunctionComponent<IPictureComponentProps> = (props) => {
     return (
-        <img className='nftSyle' src={props.nft} alt="" />
+        <img style={{padding: '10px', cursor: 'pointer',  height: '200px', width: '200px' }} className='nftSyle' src={props.nft} alt="" />
     );
 };
 
