@@ -6,22 +6,40 @@ import { Link, Outlet, useParams  } from 'react-router-dom';
 import { getNFTForRoom } from '../api';
 
 class RoomWallComponent extends React.Component<any,any> {
-    
-      render() {
-          const loadRoom = () => {
-            getNFTForRoom(342).then((res: any) => {
-              console.log(res);
-            });
-          }
-      
-          loadRoom();
-          return ( 
-          <>
-            <SendOneLamportToRandomAddress />
-            <div id='main-picture' style={{marginLeft: '36%', backgroundColor: 'white', height:'40%', width:'17%'}}>
+        constructor(props: any) {
+          super(props);
+          console.log(props);
+          this.state = {
+            loading: true,
+            imageForRoom: '',
+          };
+      }
 
-            </div>           
-          </>);
+      componentDidMount(){
+        debugger;
+        getNFTForRoom(342).then((res: any) => {
+          console.log(res.data)
+          this.setState({ imageForRoom: res.data.imageUrl, loading: false });
+        });
+      }
+
+      render() {
+          
+          if(this.state.loading){
+            return ( 
+              <>
+                <div id='main-picture' style={{marginLeft: '36%', backgroundColor: 'white', height:'40%', width:'17%'}}>
+                  <img src="" alt=""/>
+                </div>           
+              </>);
+          } else{
+            return ( 
+              <>
+              <SendOneLamportToRandomAddress />
+                  <img src={this.state.imageForRoom} alt="" id='main-picture' style={{marginLeft: '36%', height:'40%', width:'17%'}}/>         
+              </>);
+          }
+         
       }
 }
 
