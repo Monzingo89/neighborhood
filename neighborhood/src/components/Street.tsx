@@ -1,10 +1,11 @@
 import React from 'react';
 import "../home.css";
-export interface IStreetComponentProps {
-    house: any;
+import { SquareObject } from '../models/SquareRowObject';
+export interface IHouseComponentProps {
+    house: SquareObject;
 }
 
-const StreetComponent: React.FunctionComponent<IStreetComponentProps> = (props) => {
+const StreetComponent: React.FunctionComponent<IHouseComponentProps> = (props) => {
     return (
         <img key="house.runningCount" className='squareStyle' src={props.house.image} alt=""/>
     );

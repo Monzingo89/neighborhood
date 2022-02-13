@@ -1,11 +1,12 @@
 import React from 'react';
-export interface IGrassComponentProps {
-    house: any;
+import { SquareObject } from '../models/SquareRowObject';
+export interface IHouseComponentProps {
+    house: SquareObject;
 }
 
-const GrassComponent: React.FunctionComponent<IGrassComponentProps> = (props) => {
+const GrassComponent: React.FunctionComponent<IHouseComponentProps> = (props) => {
     return (
-        <img key="house.runningCount" className='squareStyle' src={props.house.image} />
+        <img key="house.runningCount" className='squareStyle' src={props.house.image} alt="" />
     );
 };
 

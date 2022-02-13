@@ -6,6 +6,8 @@ export interface INeighborhoodPageProps {}
 
 const NeighborhoodPage: React.FunctionComponent<INeighborhoodPageProps> = (props) => {
    
+    const shouldComponentUpdate = () => false
+    
     var neighborhoodMatrix = Array.from(Array(90), () => [] as SquareRowObject[]);
     var allSquareTypes = [
          { rowNumber: 1, houses:['G','G','G','G','G','G','G','G','G','G','S','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G'] },
