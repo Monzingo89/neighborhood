@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Link, Outlet, useParams  } from 'react-router-dom';
-import { getNFTForRoom } from '../api';
+import { getNFTForRoom } from '../../api';
 
 class RoomWallComponent extends React.Component<any,any> {
         constructor(props: any) {
@@ -64,7 +64,7 @@ export const SendOneLamportToRandomAddress: FC = props => {
      </div>
       <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}}>House # {number}</h2>
       <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}}>Owner {shortWallet}</h2>
-      <Link to={'/neighborhood/room/selection/' + publicKey?.toString()}>
+      <Link to={'/neighborhood/house/selection/' + publicKey?.toString()}>
       <h2 style={{color: 'white', paddingRight: '20px', fontFamily: 'cursive', cursor: 'pointer', float: 'right', visibility: publicKey === undefined || publicKey?.toString() === '' || publicKey === null ? 'hidden' : 'visible'}}>Chose Image</h2>  
           <Outlet />
       </Link>

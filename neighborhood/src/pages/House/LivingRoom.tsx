@@ -14,14 +14,14 @@ import {
     WalletModalProvider,
 } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
-import RoomWallComponent from '../components/RoomWall';
-import background from '../../public/images/room.png';
+import RoomWallComponent from './RoomWall';
+import background from '../../../public/images/room.png';
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-export interface IRoomPageProps {}
+export interface ILivingRoomPageProps {}
 
-const RoomPage: React.FunctionComponent<IRoomPageProps> = (props) => {
+const LivingRoomPage: React.FunctionComponent<ILivingRoomPageProps> = (props) => {
     
     const network = WalletAdapterNetwork.Mainnet;
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
@@ -51,4 +51,4 @@ const RoomPage: React.FunctionComponent<IRoomPageProps> = (props) => {
     );
 };
 
-export default RoomPage;
+export default LivingRoomPage;

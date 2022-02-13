@@ -1,5 +1,5 @@
 import React from 'react';
-import { SquareObject } from '../models/SquareRowObject';
+import { SquareObject } from '../../models/SquareRowObject';
 export interface IHouseComponentProps {
     house: SquareObject;
 }

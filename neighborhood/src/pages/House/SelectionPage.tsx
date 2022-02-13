@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import * as web3 from '@solana/web3.js';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
-import { createNFTForRoom } from '../api';
+import { createNFTForRoom } from '../../api';
 
 const axios = require('axios').default;
 var connection = new web3.Connection(
@@ -10,11 +10,11 @@ var connection = new web3.Connection(
     'confirmed',
 );
 
-export interface INFTSelectionPageProps {}
+export interface ISelectionPageProps {}
 
 const welcomeHeader = 'WELCOME HOME ZADDY!' + ' <3';
 
-const NFTCollectionPage: React.FunctionComponent<INFTSelectionPageProps> = (props) => {
+const SelectionPage: React.FunctionComponent<ISelectionPageProps> = (props) => {
 
     //TODO change this to not allow users to manually go to selection page
     const { pathname } = useLocation();
@@ -107,4 +107,4 @@ class RenderNFTs extends React.Component<any,any> {
       }
 }
 
-export default NFTCollectionPage;
+export default SelectionPage;

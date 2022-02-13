@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HomePage from './pages/Home';
-import NeighborhoodPage from './pages/Neighborhood';
-import NFTSelectionPage from './pages/NFTSelectionPage';
-import RoomPage from './pages/Room';
+import HomePage from './pages/Neighborhood/Home';
+import NeighborhoodPage from './pages/Neighborhood/Neighborhood';
+import LivingRoomPage from './pages/House/LivingRoom';
+import SelectionPage from './pages/House/SelectionPage';
 
 export interface IApplicationProps {}
 
@@ -14,8 +14,8 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="neighborhood">
                     <Route index element={<NeighborhoodPage />} />
-                    <Route path="/neighborhood/room/:number" element={<RoomPage />} />
-                    <Route path="/neighborhood/room/selection/:string" element={<NFTSelectionPage />} />
+                    <Route path="/neighborhood/house/:number" element={<LivingRoomPage />} />
+                    <Route path="/neighborhood/house/selection/:string" element={<SelectionPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

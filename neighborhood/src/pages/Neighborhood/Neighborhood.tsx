@@ -1,6 +1,6 @@
 import React from 'react';
-import NeighborhoodRow from '../components/NeighborhoodRow';
-import { SquareObject, SquareRowObject, SquareTypeEnum } from '../models/SquareRowObject';
+import NeighborhoodRow from './NeighborhoodRow';
+import { SquareObject, SquareRowObject, SquareTypeEnum } from '../../models/SquareRowObject';
 
 export interface INeighborhoodPageProps {}
 

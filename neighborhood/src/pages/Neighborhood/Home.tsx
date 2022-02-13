@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
-import "../home.css";
-import logo from "../gentie.gif";
+import "../../home.css";
+import logo from "../../gentie.gif";
 import NeighborhoodPage from './Neighborhood';
 
 export interface IHomePageProps {}

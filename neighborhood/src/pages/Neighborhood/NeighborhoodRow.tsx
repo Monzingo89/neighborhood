@@ -1,5 +1,5 @@
 import React from 'react';
-import { SquareObject, SquareRowObject, SquareTypeEnum } from '../models/SquareRowObject';
+import { SquareObject, SquareRowObject, SquareTypeEnum } from '../../models/SquareRowObject';
 import Grass from './Grass';
 import House from './House';
 import Street from './Street';

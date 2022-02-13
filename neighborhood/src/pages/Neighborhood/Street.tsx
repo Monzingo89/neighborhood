@@ -1,6 +1,6 @@
 import React from 'react';
-import "../home.css";
-import { SquareObject } from '../models/SquareRowObject';
+import "../../home.css";
+import { SquareObject } from '../../models/SquareRowObject';
 export interface IHouseComponentProps {
     house: SquareObject;
 }
