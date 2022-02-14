@@ -2,7 +2,8 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import * as web3 from '@solana/web3.js';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
-import { createNFTForRoom } from '../../api';
+import { setLivingRoomDisplayForHouse } from '../../api';
+import { toast } from 'react-toastify';
 
 const axios = require('axios').default;
 var connection = new web3.Connection(
@@ -18,19 +19,23 @@ const SelectionPage: React.FunctionComponent<ISelectionPageProps> = (props) => {
 
     //TODO change this to not allow users to manually go to selection page
     const { pathname } = useLocation();
+    let urlArray = pathname.split("/");
     let pubKey = pathname.split("/").pop();
-
+    let houseNumber = urlArray[3];
     return (
-        <div style={{ backgroundColor: '#B1C3F5', backgroundSize: '100% 100%', height: '200vh', textAlign: 'center' }}>
-            <div>
-                <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>{welcomeHeader}</h1>
-            </div>
-            <div>
-                <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive', paddingBottom: '20px' }}>SELECT WHO TO PUT ON DISPLAY:</h1>
-            </div>
-            <RenderNFTs pubKey={pubKey}/>
-            <Outlet />
+      <div style={{ backgroundColor: '#B1C3F5', backgroundSize: '100% 100%', height: '100vh' }}>
+        <h3 style={{ color: 'white', fontFamily: 'cursive', textAlign: 'left', cursor: 'pointer' }}>Go Back</h3>
+        <div style={{ textAlign: 'center' }}>
+          <div>
+            <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>{welcomeHeader}</h1>
+          </div>
+          <div>
+            <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive', paddingBottom: '20px' }}>SELECT WHO TO PUT ON DISPLAY:</h1>
+          </div>
+          <RenderNFTs pubKey={pubKey} houseNumber={houseNumber} />
+          <Outlet />
         </div>
+      </div>
     )
 };
 
@@ -42,12 +47,12 @@ class RenderNFTs extends React.Component<any,any> {
           loading: 'initial',
           data: [],
           pubKey: props.pubKey.toLocaleString(),
+          houseNumber: props.houseNumber
         };
     }
 
     loadData() {
         var promise = metadata.Metadata.findDataByOwner(connection, this.state.pubKey).then(async (resp) =>{
-                console.log(resp)
                 return await this.getImageForEachString(resp)
         });
         return promise;
@@ -64,7 +69,7 @@ class RenderNFTs extends React.Component<any,any> {
     }
 
     componentDidMount() {
-      debugger;
+        debugger;
         this.setState({ loading: 'true' });
         this.loadData()
         .then((data) => {
@@ -72,13 +77,13 @@ class RenderNFTs extends React.Component<any,any> {
             data: data,
             loading: 'false'
           });
-          console.log(this.state)
         });
       }  
 
       render() {
         const handleNFTSave = (nftImageUrl: any) => {
-          createNFTForRoom({wallet: this.state.pubKey, imageUrl: nftImageUrl, houseNumber: 342}).then((res: any) => {
+          setLivingRoomDisplayForHouse({wallet: this.state.pubKey, imageUrl: nftImageUrl, houseNumber: this.state.houseNumber}).then((res: any) => {
+            toast("Image Saved to Living Room");
             console.log(res);
           });
         }
@@ -101,7 +106,6 @@ class RenderNFTs extends React.Component<any,any> {
                         return <img style={{padding: '10px', cursor: 'pointer',  height: '200px', width: '200px' }} className='nftSyle' src={`${item.data.image}`} onClick={() => handleNFTSave(item.data.image)} alt="" key={item.data.image} />
                     })}
             </div>
-              
             </>);
           }
       }

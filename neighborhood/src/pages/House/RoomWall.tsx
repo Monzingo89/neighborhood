@@ -59,7 +59,7 @@ export const Househeader: FC = props => {
         <WalletMultiButton />
       </div>
       <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>House # {number}</h2>
-      {!publicKey?.toString() ? <><h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: None</h2></> : <RoomWallLinkComponent pubKey={publicKey.toString()}/>}
+      {!publicKey?.toString() ? <><h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: None</h2></> : <RoomWallLinkComponent pubKey={publicKey.toString()} houseNumber={number}/>}
     </>
   );
 };
@@ -73,6 +73,7 @@ export class RoomWallLinkComponent extends React.Component<any,any> {
         loading: true,
         isHouseOwner: false,
         pubKey: props.pubKey,
+        houseNumber: props.houseNumber,
         houseOwner: ''
       };
   }
@@ -115,7 +116,7 @@ export class RoomWallLinkComponent extends React.Component<any,any> {
           return(
             <>
             <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: {this.getShortWalletString()}</h2>
-            <Link to={'/neighborhood/house/selection/' + this.state.pubKey}>
+            <Link to={'/neighborhood/house/' + this.state.houseNumber + '/selection/' + this.state.pubKey}>
             <h2 style={{color: 'white', paddingRight: '20px', fontFamily: 'cursive', cursor: 'pointer', float: 'right'}}>Chose Image</h2>  
                 <Outlet />
             </Link>

@@ -1,6 +1,6 @@
 import { client, q } from '../config/db';
 
-export const createNFTForRoom = ({wallet, imageUrl, houseNumber}: any) =>
+export const setLivingRoomDisplayForHouse = ({wallet, imageUrl, houseNumber}: any) =>
     client
         .query(
             q.Create(q.Collection('GentiesHodlers'), {

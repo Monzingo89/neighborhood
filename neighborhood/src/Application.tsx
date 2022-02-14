@@ -15,7 +15,7 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
                 <Route path="neighborhood">
                     <Route index element={<NeighborhoodPage />} />
                     <Route path="/neighborhood/house/:number" element={<LivingRoomPage />} />
-                    <Route path="/neighborhood/house/selection/:string" element={<SelectionPage />} />
+                    <Route path="/neighborhood/house/:number/selection/:string" element={<SelectionPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>
