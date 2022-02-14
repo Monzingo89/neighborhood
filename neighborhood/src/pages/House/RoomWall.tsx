@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { Link, Outlet, useParams  } from 'react-router-dom';
+import { Link, Outlet, useNavigate, useParams  } from 'react-router-dom';
 import { getDataForHouse } from '../../api';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
 import * as web3 from '@solana/web3.js';
@@ -52,7 +52,7 @@ class RoomWallComponent extends React.Component<any,any> {
 export const Househeader: FC = props => {
   const { number } = useParams();
   const { publicKey } = useWallet();
-  
+  const navigate = useNavigate();
   return (
     <>
       <div style={{paddingRight: '30px', paddingTop:'20px', float: 'right'}}>
@@ -60,6 +60,7 @@ export const Househeader: FC = props => {
       </div>
       <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>House # {number}</h2>
       {!publicKey?.toString() ? <><h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: None</h2></> : <RoomWallLinkComponent pubKey={publicKey.toString()} houseNumber={number}/>}
+      <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}} onClick={() => navigate('/') }>Go Back</h2>
     </>
   );
 };

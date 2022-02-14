@@ -4,10 +4,8 @@ import { SquareObject, SquareRowObject, SquareTypeEnum } from '../../models/Squa
 
 export interface INeighborhoodPageProps {}
 
-const NeighborhoodPage: React.FunctionComponent<INeighborhoodPageProps> = (props) => {
+const NeighborhoodPage: React.FunctionComponent<INeighborhoodPageProps> = React.memo((props) => {
    
-    const shouldComponentUpdate = () => false
-    
     var neighborhoodMatrix = Array.from(Array(90), () => [] as SquareRowObject[]);
     var allSquareTypes = [
          { rowNumber: 1, houses:['G','G','G','G','G','G','G','G','G','G','S','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G','G'] },
@@ -139,6 +137,6 @@ const NeighborhoodPage: React.FunctionComponent<INeighborhoodPageProps> = (props
            
         </div>
     );
-};
+});
 
 export default NeighborhoodPage;
