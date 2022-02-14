@@ -1,6 +1,6 @@
 /* eslint-disable react/require-render-return */
 import React, { FC } from 'react';
-import { WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Link, Outlet, useParams  } from 'react-router-dom';
 import { getDataForHouse } from '../../api';
@@ -52,17 +52,14 @@ class RoomWallComponent extends React.Component<any,any> {
 export const Househeader: FC = props => {
   const { number } = useParams();
   const { publicKey } = useWallet();
-
+  
   return (
     <>
       <div style={{paddingRight: '30px', paddingTop:'20px', float: 'right'}}>
         <WalletMultiButton />
       </div>
-      <div style={{paddingRight: '30px', paddingTop:'20px', float: 'right', visibility: publicKey === undefined || publicKey?.toLocaleString() === '' || publicKey === null ? 'hidden' : 'visible' }}>
-       <WalletDisconnectButton  />
-     </div>
       <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>House # {number}</h2>
-      {!publicKey?.toString() ? <></> : <RoomWallLinkComponent pubKey={publicKey.toString()}/>}
+      {!publicKey?.toString() ? <><h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: None</h2></> : <RoomWallLinkComponent pubKey={publicKey.toString()}/>}
     </>
   );
 };
@@ -117,7 +114,7 @@ export class RoomWallLinkComponent extends React.Component<any,any> {
         if(!this.state.loading && this.state.isHouseOwner){
           return(
             <>
-            <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner {this.getShortWalletString()}</h2>
+            <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: {this.getShortWalletString()}</h2>
             <Link to={'/neighborhood/house/selection/'}>
             <h2 style={{color: 'white', paddingRight: '20px', fontFamily: 'cursive', cursor: 'pointer', float: 'right'}}>Chose Image</h2>  
                 <Outlet />
@@ -127,7 +124,7 @@ export class RoomWallLinkComponent extends React.Component<any,any> {
         } else {
           return( 
             <>
-            <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner {this.getShortWalletString()}</h2>
+            <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: {this.getShortWalletString()}</h2>
             </>
           )
         }
