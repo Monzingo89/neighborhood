@@ -14,7 +14,7 @@ export const createNFTForRoom = ({wallet, imageUrl, houseNumber}: any) =>
         .then(ret => ret)
         .catch(error => console.error('Error: ', error.message));
 
-export const getNFTForRoom = (houseNumber: any) =>
+export const getDataForHouse = (houseNumber: any) =>
     client
         .query(
             q.Get(

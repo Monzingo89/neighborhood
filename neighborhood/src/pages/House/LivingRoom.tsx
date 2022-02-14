@@ -16,13 +16,14 @@ import {
 import { clusterApiUrl } from '@solana/web3.js';
 import RoomWallComponent from './RoomWall';
 import background from '../../../public/images/room.png';
+import { useParams } from 'react-router-dom';
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 export interface ILivingRoomPageProps {}
 
 const LivingRoomPage: React.FunctionComponent<ILivingRoomPageProps> = (props) => {
-    
+    let { number } = useParams();
     const network = WalletAdapterNetwork.Mainnet;
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
     const wallets = useMemo(
@@ -43,7 +44,7 @@ const LivingRoomPage: React.FunctionComponent<ILivingRoomPageProps> = (props) =>
             <ConnectionProvider endpoint={endpoint}>
                 <WalletProvider wallets={wallets} autoConnect>
                     <WalletModalProvider> 
-                            <RoomWallComponent />
+                            <RoomWallComponent houseNumber={number} />
                     </WalletModalProvider>
                 </WalletProvider>
             </ConnectionProvider>
