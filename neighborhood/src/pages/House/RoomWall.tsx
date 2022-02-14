@@ -115,7 +115,7 @@ export class RoomWallLinkComponent extends React.Component<any,any> {
           return(
             <>
             <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: {this.getShortWalletString()}</h2>
-            <Link to={'/neighborhood/house/selection/'}>
+            <Link to={'/neighborhood/house/selection/' + this.state.pubKey}>
             <h2 style={{color: 'white', paddingRight: '20px', fontFamily: 'cursive', cursor: 'pointer', float: 'right'}}>Chose Image</h2>  
                 <Outlet />
             </Link>
