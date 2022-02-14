@@ -1,9 +1,10 @@
 import React from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import * as web3 from '@solana/web3.js';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
 import { setLivingRoomDisplayForHouse } from '../../api';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const axios = require('axios').default;
 var connection = new web3.Connection(
@@ -22,9 +23,10 @@ const SelectionPage: React.FunctionComponent<ISelectionPageProps> = (props) => {
     let urlArray = pathname.split("/");
     let pubKey = pathname.split("/").pop();
     let houseNumber = urlArray[3];
+    const navigate = useNavigate();
     return (
       <div style={{ backgroundColor: '#B1C3F5', backgroundSize: '100% 100%', height: '100vh' }}>
-        <h3 style={{ color: 'white', fontFamily: 'cursive', textAlign: 'left', cursor: 'pointer' }}>Go Back</h3>
+        <h3 style={{ color: 'white', fontFamily: 'cursive', textAlign: 'left', cursor: 'pointer' }} onClick={() => navigate('/neighborhood/house/' + houseNumber) }>Go Back</h3>
         <div style={{ textAlign: 'center' }}>
           <div>
             <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>{welcomeHeader}</h1>
@@ -42,7 +44,6 @@ const SelectionPage: React.FunctionComponent<ISelectionPageProps> = (props) => {
 class RenderNFTs extends React.Component<any,any> {
     constructor(props: any) {
         super(props);
-        console.log(props);
         this.state = {
           loading: 'initial',
           data: [],
@@ -83,9 +84,8 @@ class RenderNFTs extends React.Component<any,any> {
       render() {
         const handleNFTSave = (nftImageUrl: any) => {
           setLivingRoomDisplayForHouse({wallet: this.state.pubKey, imageUrl: nftImageUrl, houseNumber: this.state.houseNumber}).then((res: any) => {
-            toast("Image Saved to Living Room");
-            console.log(res);
-          });
+            toast.success("Image Saved to Living Room");
+          })
         }
         if (this.state.loading === 'initial') {
             return ( <>
@@ -101,11 +101,23 @@ class RenderNFTs extends React.Component<any,any> {
           
           if(this.state.loading === 'false'){
             return ( <>
-            <div className='container' style={{borderStyle: 'dashed', borderColor: 'purple'}}>
-                    {this.state.data.map((item: { data: { image: React.Key | null | undefined; }; }) => {
-                        return <img style={{padding: '10px', cursor: 'pointer',  height: '200px', width: '200px' }} className='nftSyle' src={`${item.data.image}`} onClick={() => handleNFTSave(item.data.image)} alt="" key={item.data.image} />
-                    })}
-            </div>
+              <ToastContainer
+                theme="dark"
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+              <div className='container' style={{ borderStyle: 'dashed', borderColor: 'purple' }}>
+                {this.state.data.map((item: { data: { image: React.Key | null | undefined; }; }) => {
+                  return <img style={{ padding: '10px', cursor: 'pointer', height: '200px', width: '200px' }} className='nftSyle' src={`${item.data.image}`} onClick={() => handleNFTSave(item.data.image)} alt="" key={item.data.image} />
+                })}
+              </div>
             </>);
           }
       }

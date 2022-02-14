@@ -36,7 +36,7 @@ class RoomWallComponent extends React.Component<any,any> {
               <>
                 <Househeader />
                 <div id='main-picture' style={{marginLeft: '36%', backgroundColor: 'white', height:'40%', width:'17%'}}>
-                  <img src="" alt=""/>
+                  
                 </div>           
               </>);
           } else{

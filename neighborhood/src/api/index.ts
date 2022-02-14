@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { client, q } from '../config/db';
 
 export const setLivingRoomDisplayForHouse = ({wallet, imageUrl, houseNumber}: any) =>
@@ -12,7 +13,10 @@ export const setLivingRoomDisplayForHouse = ({wallet, imageUrl, houseNumber}: an
             })
         )
         .then(ret => ret)
-        .catch(error => console.error('Error: ', error.message));
+        .catch(error => {
+            toast.error("Something Went Wrong :(")
+            console.error('Error: ', error.message)
+        });
 
 export const getDataForHouse = (houseNumber: any) =>
     client
@@ -21,4 +25,7 @@ export const getDataForHouse = (houseNumber: any) =>
                 q.Match(q.Index('nft_by_house'), houseNumber))
         )
         .then(ret => ret)
-        .catch(error => console.error('Error: ', error.message));
+        .catch(error => {
+            toast.error("Something Went Wrong :(")
+            console.error('Error: ', error.message)
+        });
