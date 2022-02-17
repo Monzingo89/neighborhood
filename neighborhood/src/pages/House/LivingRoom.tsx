@@ -15,7 +15,7 @@ import {
 } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
 import RoomWallComponent from './RoomWall';
-import background from '../../../public/images/room.png';
+import background from '../../images/room.png';
 import { useParams } from 'react-router-dom';
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
