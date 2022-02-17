@@ -4,7 +4,7 @@ const webpack = require('webpack')
 
 module.exports = {
     entry: "./src/index.tsx",
-    output: { path: path.join(__dirname, "build"), filename: "index.bundle.js", publicPath: '/' },
+    output: { path: path.join(__dirname, "build"), filename: "index.bundle.js" },
     mode: process.env.NODE_ENV || "development",
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
