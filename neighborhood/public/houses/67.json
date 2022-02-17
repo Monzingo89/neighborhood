@@ -1,0 +1,62 @@
+{
+  "name": "Gentie Home #67",
+  "symbol": "GENTHOME",
+  "description": "Real Estate for the Gentie Neighborhood. Rent is going up!",
+  "seller_fee_basis_points": 1000,
+  "image": "image.png",
+  "external_url": "https://genties.com/",
+  "edition": 67,
+  "attributes": [
+    {
+      "trait_type": "Sky",
+      "value": "Coastalpng"
+    },
+    {
+      "trait_type": "Trees",
+      "value": "none"
+    },
+    {
+      "trait_type": "Yard",
+      "value": "Mountain"
+    },
+    {
+      "trait_type": "Back",
+      "value": "Green"
+    },
+    {
+      "trait_type": "Front",
+      "value": "Blue Garage"
+    },
+    {
+      "trait_type": "Add Ons",
+      "value": "Standard Yellow"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "image.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": [
+      {
+        "address": "9JqSS98VQy4Lsr7BCPm9ehD6YQhQxkf8WCSjXp1jdtMm",
+        "share": 20
+      },
+      {
+        "address": "7BiSQw3szSfQv4RcCnJmwV3fZo8LctSJ6hR8DTdaUo3F",
+        "share": 10
+      },
+      {
+        "address": "DvLuHFnFmrdoyY2DXxgsf1yY2xuVRcUQa5VmZo8RUw2Z",
+        "share": 20
+      },
+      {
+        "address": "44iPxGLR7Zc3B9dNTz1vE4iVafAbyS1a1oFeE9y3yFNG",
+        "share": 50
+      }
+    ]
+  }
+}
