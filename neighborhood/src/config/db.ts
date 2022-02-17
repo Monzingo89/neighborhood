@@ -1,6 +1,6 @@
 import faunadb from 'faunadb';
 const client = new faunadb.Client({
-  secret: '',
+  secret: 'fnAEfOOvWKAAQK2_JBoEboJhE5Bj5DpucowIZWX-',
   domain: 'db.us.fauna.com',
   port: 443,
   scheme: 'https',

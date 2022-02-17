@@ -6,7 +6,6 @@
             "dom.iterable",
             "esnext"
         ],
-        "allowJs": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
@@ -23,7 +22,5 @@
             "stream": ["./node_modules/readable-stream"]
         }
     },
-    "include": [
-        "src"
-    ]
+    "include": ["src", "fonts.d.ts"]
 }
