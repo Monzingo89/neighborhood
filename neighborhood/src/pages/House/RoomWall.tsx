@@ -1,9 +1,9 @@
 /* eslint-disable react/require-render-return */
-import React, { FC } from 'react';
+import React from 'react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Link, Outlet, useNavigate, useParams  } from 'react-router-dom';
-import { getDataForHouse } from '../../api';
+import { getDataForHouse, getArweaveForHouse } from '../../api';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
 import * as web3 from '@solana/web3.js';
 
@@ -19,14 +19,13 @@ class RoomWallComponent extends React.Component<any,any> {
             loading: true,
             imageForRoom: '',
             houseNumber: parseInt(props.houseNumber),
-            houseOwner: 'None'
+            houseOwner: ''
           };
       }
-
+  
       componentDidMount(){
-        getDataForHouse(this.state.houseNumber).then((res: any) => {
-          //here we get the image url from fauna db, dont need to be owner to look at image
-          this.setState({ imageForRoom: res?.data?.imageUrl, loading: false, houseOwner: res?.data?.wallet });
+        getDataForHouse(this.state.houseNumber.toString()).then((res: any) => {
+          this.setState({ imageForRoom: res?.data?.imageUrl, loading: false, houseOwner: res?.data?.wallet ?? 'None'});
         });
       }
 
@@ -34,7 +33,7 @@ class RoomWallComponent extends React.Component<any,any> {
           if(!this.state.loading && !this.state.imageForRoom){
             return ( 
               <>
-                <Househeader />
+                <Househeader houseOwner={this.state.houseOwner}/>
                 <div id='main-picture' style={{marginLeft: '36%', backgroundColor: 'white', height:'40%', width:'17%'}}>
                   
                 </div>           
@@ -42,24 +41,30 @@ class RoomWallComponent extends React.Component<any,any> {
           } else{
             return ( 
               <>
-                  <Househeader />
+                  <Househeader houseOwner={this.state.houseOwner}/>
                   <img src={this.state.imageForRoom} alt="" id='main-picture' style={{marginLeft: '36%', height:'40%', width:'17%'}}/>         
               </>);
           }
       }
 }
 
-export const Househeader: FC = props => {
+export const Househeader = (props: { houseOwner: string }) => {
   const { number } = useParams();
   const { publicKey } = useWallet();
   const navigate = useNavigate();
+
+  const getShortWalletString = (houseOwner: string) => {
+    return houseOwner === 'None' ? 'None' : houseOwner.substring(0, 4) + '...' + houseOwner.slice(houseOwner.length - 4);
+  }
+
   return (
     <>
       <div style={{paddingRight: '30px', paddingTop:'20px', float: 'right'}}>
         <WalletMultiButton />
       </div>
       <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>House # {number}</h2>
-      {!publicKey?.toString() ? <><h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: None</h2></> : <RoomWallLinkComponent pubKey={publicKey.toString()} houseNumber={number}/>}
+      <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: {getShortWalletString(props.houseOwner)}</h2>
+      {!publicKey?.toString() ? <></> : <RoomWallLinkComponent pubKey={publicKey.toString()} houseNumber={number}/>}
       <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}} onClick={() => navigate('/') }>Go Back</h2>
     </>
   );
@@ -75,48 +80,33 @@ export class RoomWallLinkComponent extends React.Component<any,any> {
         isHouseOwner: false,
         pubKey: props.pubKey,
         houseNumber: props.houseNumber,
-        houseOwner: ''
+        arweaveReference: '',
       };
   }
 
   loadData() {
-    //will get this from the DB once assigned to house
-    //this is the mint key assigned on mint and we check against wallet...
-    //i used wallet ck... for testing
-    var mintMetaPlexMetadataKey = 'BDgThfAMsPnq1JYQgSMPR2uyQ8ovwdrbSZ47X28qnjzf';
-    var promise = metadata.Metadata.findByMint(connection, mintMetaPlexMetadataKey).then(async (resp) => {
-            this.setState({ houseOwner:resp.data.updateAuthority, isHouseOwner: resp.data.updateAuthority === this.state.pubKey });
-    });
-    return promise;
+      getArweaveForHouse(this.state.houseNumber.toString()).then((res: any) => {
+        this.setState({ arweaveReference: res?.data?.link });
+        metadata.Metadata.findDataByOwner(connection, this.state.pubKey).then((resp) =>{
+          resp.forEach(nft => {
+            if(nft.data.uri === this.state.arweaveReference){
+                this.setState({ isHouseOwner: true});
+            }
+          })
+          this.setState({ loading: false});
+        });
+      });
+      
   }
-
-  //Wont need to use this unless we go by arweave data instead
-  // async getImageForEachString(resp: any[]) {
-  //   let promiseList: any[] = [];
-  //   resp.forEach(async nft => {
-  //       promiseList.push(axios.get(nft.data.uri));
-  //   })
-    
-  //   const bar = await Promise.all(promiseList);
-  //   return bar;
-  // }
 
   componentDidMount(){
-    this.loadData()
-        .then((data) => {
-          this.setState({ data: data, loading: false, });
-    });
-  }
-
-  getShortWalletString = () => {
-    return this.state.houseOwner.substring(0, 4) + '...' + this.state.houseOwner.slice(this.state.houseOwner.length - 4);
+    this.loadData();
   }
 
   render() {
         if(!this.state.loading && this.state.isHouseOwner){
           return(
             <>
-            <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: {this.getShortWalletString()}</h2>
             <Link to={'/neighborhood/house/' + this.state.houseNumber + '/selection/' + this.state.pubKey}>
             <h2 style={{color: 'white', paddingRight: '20px', fontFamily: 'cursive', cursor: 'pointer', float: 'right'}}>Chose Image</h2>  
                 <Outlet />
@@ -126,7 +116,6 @@ export class RoomWallLinkComponent extends React.Component<any,any> {
         } else {
           return( 
             <>
-            <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: {this.getShortWalletString()}</h2>
             </>
           )
         }

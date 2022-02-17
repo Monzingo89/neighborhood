@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import * as web3 from '@solana/web3.js';
 import * as metadata from "@metaplex-foundation/mpl-token-metadata";
-import { setLivingRoomDisplayForHouse } from '../../api';
+import { setRoomDisplayForHouse, getDataForHouse, updateRoomDisplayForHouse } from '../../api';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -83,9 +83,18 @@ class RenderNFTs extends React.Component<any,any> {
 
       render() {
         const handleNFTSave = (nftImageUrl: any) => {
-          setLivingRoomDisplayForHouse({wallet: this.state.pubKey, imageUrl: nftImageUrl, houseNumber: this.state.houseNumber}).then((res: any) => {
-            toast.success("Image Saved to Living Room");
-          })
+          getDataForHouse(this.state.houseNumber.toString()).then((res: any) => {
+            console.log(res?.data?.imageUrl)
+            if(res){
+              updateRoomDisplayForHouse({wallet: this.state.pubKey, imageUrl: nftImageUrl, houseNumber: this.state.houseNumber}).then((res: any) => {
+                 toast.success("Image Updated");
+              })
+            } else{
+               setRoomDisplayForHouse({wallet: this.state.pubKey, imageUrl: nftImageUrl, houseNumber: this.state.houseNumber}).then((res: any) => {
+                 toast.success("Image Saved to Room");
+              })
+            }
+          });
         }
         if (this.state.loading === 'initial') {
             return ( <>
