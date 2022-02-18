@@ -24,11 +24,6 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
     height: 100%;
   }
-
-  @font-face {
-    font-family: 'cubic';
-    src: local('cubic'), url(fonts/cubicfive10.otf) format('truetype');
-  }
 `;
 
 export default GlobalStyle;

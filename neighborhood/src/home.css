@@ -1,7 +1,7 @@
 .navbar{
     background-color: rgb(102, 163, 255);
     font-weight: 400;
-    font-family: "CubicFive10";
+    font-family: "cubic";
 }
 a:hover { 
     text-shadow: 0 0 5px white;
@@ -34,4 +34,9 @@ a:hover {
 
 .navbar a{
     padding-left: 40px;
+}
+
+@font-face {
+    font-family: 'cubic';
+    src: local('cubic'), url(./fonts/cubic/cubicfive10.ttf) format('truetype');
 }
