@@ -26,13 +26,13 @@ const SelectionPage: React.FunctionComponent<ISelectionPageProps> = (props) => {
     const navigate = useNavigate();
     return (
       <div style={{ backgroundColor: '#B1C3F5', backgroundSize: '100% 100%', height: '100vh' }}>
-        <h3 style={{ color: 'white', fontFamily: 'cursive', textAlign: 'left', cursor: 'pointer' }} onClick={() => navigate('/neighborhood/house/' + houseNumber) }>Go Back</h3>
+        <h3 style={{ color: 'white', fontFamily: 'cubic', textAlign: 'left', cursor: 'pointer' }} onClick={() => navigate('/neighborhood/house/' + houseNumber) }>Go Back</h3>
         <div style={{ textAlign: 'center' }}>
           <div>
-            <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive' }}>{welcomeHeader}</h1>
+            <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cubic' }}>{welcomeHeader}</h1>
           </div>
           <div>
-            <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cursive', paddingBottom: '20px' }}>SELECT WHO TO PUT ON DISPLAY:</h1>
+            <h1 style={{ color: 'white', paddingTop: '40px', fontFamily: 'cubic', paddingBottom: '20px' }}>SELECT WHO TO PUT ON DISPLAY:</h1>
           </div>
           <RenderNFTs pubKey={pubKey} houseNumber={houseNumber} />
           <Outlet />
@@ -98,13 +98,13 @@ class RenderNFTs extends React.Component<any,any> {
         }
         if (this.state.loading === 'initial') {
             return ( <>
-              <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}}>INITIALIZING</h2>
+              <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cubic', cursor: 'pointer'}}>INITIALIZING</h2>
             </>);
           }
   
           if (this.state.loading === 'true') {
             return ( <>
-                <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}}>LOADING NFTs</h2>
+                <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cubic', cursor: 'pointer'}}>LOADING NFTs</h2>
               </>);
           }
           

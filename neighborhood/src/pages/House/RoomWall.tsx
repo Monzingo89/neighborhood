@@ -34,7 +34,7 @@ class RoomWallComponent extends React.Component<any,any> {
             return ( 
               <>
                 <Househeader houseOwner={this.state.houseOwner}/>
-                <div id='main-picture' style={{marginLeft: '36%', backgroundColor: 'white', height:'40%', width:'17%'}}>
+                <div id='main-picture' style={{marginLeft: '32vw', backgroundColor: 'white', height:'20vw', width:'20vw'}}>
                   
                 </div>           
               </>);
@@ -42,7 +42,7 @@ class RoomWallComponent extends React.Component<any,any> {
             return ( 
               <>
                   <Househeader houseOwner={this.state.houseOwner}/>
-                  <img src={this.state.imageForRoom} alt="" id='main-picture' style={{marginLeft: '36%', height:'40%', width:'17%'}}/>         
+                  <img src={this.state.imageForRoom} alt="" id='main-picture' style={{marginLeft: '32vw', height:'20vw', width:'20vw'}}/>         
               </>);
           }
       }
@@ -62,10 +62,10 @@ export const Househeader = (props: { houseOwner: string }) => {
       <div style={{paddingRight: '30px', paddingTop:'20px', float: 'right'}}>
         <WalletMultiButton />
       </div>
-      <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>House # {number}</h2>
-      <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive'}}>Owner: {getShortWalletString(props.houseOwner)}</h2>
+      <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cubic'}}>House # {number}</h2>
+      <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cubic'}}>Owner: {getShortWalletString(props.houseOwner)}</h2>
       {!publicKey?.toString() ? <></> : <RoomWallLinkComponent pubKey={publicKey.toString()} houseNumber={number}/>}
-      <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', fontFamily: 'cursive', cursor: 'pointer'}} onClick={() => navigate('/') }>Go Back</h2>
+      <h2 style={{color: 'white', paddingLeft: '20px', paddingTop:'10px', width:'max-content', fontFamily: 'cubic', cursor: 'pointer'}} onClick={() => navigate('/') }>Go Back</h2>
     </>
   );
 };

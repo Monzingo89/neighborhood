@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import NeighborhoodRow from './NeighborhoodRow';
 import { SquareObject, SquareRowObject, SquareTypeEnum } from '../../models/SquareRowObject';
+import { isConstructorDeclaration, isGetAccessorDeclaration } from 'typescript';
 
 export interface INeighborhoodPageProps {}
 
@@ -90,7 +91,7 @@ const NeighborhoodPage: React.FunctionComponent<INeighborhoodPageProps> = React.
         { rowNumber: 80, houses:['G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G'], },
         { rowNumber: 81, houses:['G','G','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','G'], },
         { rowNumber: 82, houses:['G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G'], },
-        { rowNumber: 83, houses:['G','G','S','H','G','G','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','G'], },
+        { rowNumber: 83, houses:['G','G','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','H','G','H','S','G'], },
         { rowNumber: 84, houses:['G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G','G','G','S','G'], },
         { rowNumber: 85, houses:['G','G','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','S','G'], },
         { rowNumber: 86, houses:['G','G','S','G','H','G','H','G','H','G','H','G','H','G','H','G','H','G','H','G','H','G','H','G','H','G','S','G','H','G','S','G'], },
@@ -130,13 +131,50 @@ const NeighborhoodPage: React.FunctionComponent<INeighborhoodPageProps> = React.
 
     return (
      
-        <div>
+        <div id="neighborhood">
             {neighborhoodMatrix.map((row, o) => {
                 return <NeighborhoodRow key={o} row={row} />;
             })}
            
         </div>
     );
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    //allows type house number to scroll to house
+    let buffer: string[] = [];
+
+    document.addEventListener('keydown', event => {
+        const charList = '0123456789';
+        const key = event.key.toLowerCase();
+
+        if(key === 'enter'){
+            window.scrollTo(0, 0)
+            buffer = [];
+        }
+        // we are only interested in alphanumeric keys
+        if (charList.indexOf(key) === -1) return;
+
+        buffer.push(key);
+        if(buffer.length === 3){
+            for (var i = 0; i < buffer.length; i++) {
+                var three = buffer[i] + buffer[i+1] + buffer[i+2]
+                if(buffer.indexOf(undefined) > 0){
+                    buffer = [];
+                    return;
+                }
+                const violation = document.getElementById(three); 
+                window.scrollTo({
+                    top:violation.offsetTop,
+                    behavior:"smooth"
+                });
+                buffer = [];
+            }
+            
+        } else{
+            return;
+        }
+    });
 });
 
 export default NeighborhoodPage;
